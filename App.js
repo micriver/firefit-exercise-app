@@ -1,12 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+// import Stopwatch from "./components/functional/stopwatch-functional";
+import Stopwatch from "./screens/new-stopwatch";
+// import Stopwatch from "./screens/stopwatch";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.appTitle}>Firefit🔥</Text>
+      <Stopwatch />
     </View>
   );
 }
@@ -14,8 +17,18 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    // backgroundColor: "#393c59",
+    // backgroundColor: "#080818",
+    backgroundColor: "#383C4f",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingTop: "40%",
+  },
+  appTitle: {
+    paddingBottom: "20%",
+    fontSize: 40,
+    textTransform: "uppercase",
+    color: "#f0f3f8",
   },
 });
