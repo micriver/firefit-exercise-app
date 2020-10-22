@@ -14,11 +14,14 @@ export default function TestApp(props) {
   const [laps, setLaps] = useState([0]);
   const [oldLap, saveOldLap] = useState(0);
 
-  const handleLap = (newTime) => {
-    // newlap = 25:00
-    // 1st lap already in array = 15:00
-    // lap to display = 10:00
+  const formatLapTime = (t) => {
+    return Number.parseFloat(t).toFixed(2);
+  };
 
+  const handleLap = (newTime) => {
+    // newTimmmme.toFixed(3);
+    Number.parseFloat(newTime).toFixed(2);
+    console.log(typeof newTime);
     console.log("typeof laps[0] BEFORE LOOP is:    ", typeof laps[0]);
     console.log("typeof newTime BEFORE LOOP is:    ", typeof newTime);
     // calculate lap logic here
@@ -27,8 +30,8 @@ export default function TestApp(props) {
     if (laps[0] === 0) {
       // if (typeof laps[0] !== "number" && typeof laps[0] === 0) {
       console.log("here");
-      setLaps([newTime]);
-      saveOldLap(newTime);
+      setLaps([formatLapTime(newTime)]);
+      saveOldLap(formatLapTime(newTime));
       // setLaps((laps[0] = newTime));
       if ((laps[0] = newTime)) {
         console.log("newTime has taken over the first number in laps.");
@@ -39,15 +42,12 @@ export default function TestApp(props) {
       }
     } else {
       console.log("we are outside the first if check");
-      if (laps[0] > 0) {
-        // if the
-        newLap = newTime - oldLap;
-        saveOldLap(newTime);
-      } else {
-        newLap = newTime - laps[0];
-      }
+      // if (laps[0] > 0) {
+      newLap = newTime - oldLap;
+      saveOldLap(newTime);
+      // }
       console.log("here is the newLap time:   ", newLap);
-      setLaps([newLap, ...laps]);
+      setLaps([formatLapTime(newLap), ...laps]);
       console.log("the new lap has been placed inside the array of laps");
     }
   };
