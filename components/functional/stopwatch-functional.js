@@ -42,9 +42,9 @@ export default function TestApp(props) {
     // setState({ stopwatchStart: false, stopwatchReset: true });
   };
 
-  getFormattedTime = (time) => {
-    currentTime = time;
-  };
+  // getFormattedTime = (time) => {
+  //   currentTime = time;
+  // };
 
   return (
     <View>
@@ -54,7 +54,7 @@ export default function TestApp(props) {
         start={stopwatchStart}
         reset={stopwatchReset}
         options={options}
-        getTime={getFormattedTime}
+        // getTime={getFormattedTime}
       />
       <TouchableHighlight onPress={toggleStopwatch}>
         <Text style={{ fontSize: 30 }}>
@@ -70,8 +70,8 @@ export default function TestApp(props) {
         start={timerStart}
         reset={timerReset}
         options={options}
-        handleFinish={handleTimerComplete}
-        getTime={getFormattedTime}
+        // handleFinish={handleTimerComplete}
+        // getTime={getFormattedTime}
       />
       <TouchableHighlight onPress={toggleTimer}>
         <Text style={{ fontSize: 30 }}>{!timerStart ? "Start" : "Stop"}</Text>

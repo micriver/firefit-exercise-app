@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 let padToTwo = (num) => (num <= 9 ? `0${num}` : num);
@@ -10,77 +10,87 @@ export default function stopwatch() {
   const [msec, setMsec] = useState(0);
   const [laps, setLaps] = useState([]); // empty array to loop populate and display
   const [start, setStart] = useState(false);
-  // const [time, setTime] = useState(null);
 
-  // stopwatch functions
-  const handleToggle = () => {
-    setStart(!start);
-    // might need to set a reset to false here for timer
-  };
+  // custom useInterval code:
+  const [count, setCount] = useState(0); // the thing being counted
+  const [delay, setDelay] = useState(1); // the speed of the count
+  // const [isRunning, setIsRunning] = useState(true); // start and stop
+  const [isRunning, setIsRunning] = useState(false); // start and stop
 
-  const handleLap = (min, sec, msec) => {
-    laps = [{ min, sec, msec }, ...laps]; // add new lap time on top
-  };
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
 
-  let interval = null;
+    // Remember the latest function.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
 
-  const handleStart = () => {
-    if (!start) {
-      interval = setInterval(() => {
-        // console.log("hi mike");
-        // setSec((sec) => sec + 1);
-        if (sec !== 59) {
-          setSec((sec) => sec + 1);
-        }
-      }, 1000);
-    }
-    // clearInterval(interval);
-    // setStart(false);
-  };
-  // // setStart(true);
-  // // } else {
-  // //   clearInterval(interval);
-  // // }
-  // if (!start) {
-  //   interval = setInterval(() => {
-  //     if (msec !== 99) {
-  //       setMsec(msec + 1);
-  //     } else if (sec !== 59) {
-  //       setMsec(0);
-  //       setSec(1 + sec);
-  //     } else {
-  //       setMsec(0);
-  //       setSec(0);
-  //       setMin(1 + min);
-  //     }
-  //   }, 1); // interval is 1 MILIsecond
-  // } else {
-  //   clearInterval(interval);
-  //   interval = null;
-  //   }
-  // };
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
 
-  const handleStop = () => {
-    console.log("stop");
-    clearInterval(interval);
-    setStart(false);
-    interval = null;
-  };
+  useInterval(
+    () => {
+      // Your custom logic here
+      // setCount(count - 1);
+      if (msec !== 99) {
+        setMsec(msec + 1);
+      } else if (sec !== 59) {
+        setMsec(0);
+        setSec(sec + 1);
+      }
+    },
+    isRunning ? delay : null
+  );
 
-  const handleReset = () => {
-    // setStart(false);
-    if (!start) {
-      console.log("start is false now");
-    }
-    setHours(0);
-    setMin(0);
+  function handleDelayChange(e) {
+    setDelay(Number(e.target.value));
+  }
+
+  function handleStart() {
+    // function handleIsRunningChange(e) {
+    // setIsRunning(e.target.checked);
+    setIsRunning(true);
+  }
+
+  function handleStop() {
+    // function handleIsRunningChange(e) {
+    // setIsRunning(e.target.checked);
+    setIsRunning(false);
+  }
+
+  function handleReset() {
+    setIsRunning(false);
     setSec(0);
     setMsec(0);
+    setDelay(1);
+  }
 
-    setLaps([]);
-    clearInterval(interval);
-    interval = null;
-  };
+  // stopwatch functions
+  // const handleToggle = () => {
+  //   setStart(!start);
+  //   // might need to set a reset to false here for timer
+  // };
+
+  // const handleLap = (min, sec, msec) => {
+  //   laps = [{ min, sec, msec }, ...laps]; // add new lap time on top
+  // };
+
+  // let interval = null;
+
+  // const handleStart = () => {};
+
+  // const handleStop = () => {};
+
+  // const handleReset = () => {};
 
   return (
     <View style={styles.container}>
@@ -162,5 +172,8 @@ setInterval explanation: https://youtu.be/ubLC1JxMqfY?t=231
 // }, 1000); // 1000 equals, 1 second
 
 setInterval just doesn't seem to work with React Hooks: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+
+javascript callbacks explained: https://www.youtube.com/watch?v=Nau-iEEgEoM
+useEffect Hooks in React explained: https://reactjs.org/docs/hooks-effect.html
 
 */
