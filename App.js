@@ -1,13 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Gridtest from "./components/functional/gridtest";
 import Stopwatch from "./components/functional/stopwatch-compound-timer";
-// import Stopwatch from "./components/functional/stopwatch-functional";
-// import Stopwatch from "./screens/new-stopwatch-inaccurate";
-// import Stopwatch from "./screens/stopwatch";
 
 export default function App() {
   return (
+    // <Gridtest />
     <View style={styles.container}>
       <Text style={styles.appTitle}>Firefit🔥</Text>
       <Stopwatch />
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "#080818",
     backgroundColor: "#383C4f",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     paddingTop: "40%",
   },
   appTitle: {

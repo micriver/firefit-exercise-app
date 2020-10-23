@@ -14,46 +14,23 @@ export default function TestApp(props) {
   const [laps, setLaps] = useState([0]);
   const [oldLap, saveOldLap] = useState(0);
 
+  // helper function
   const formatLapTime = (t) => {
     return Number.parseFloat(t).toFixed(2);
   };
 
   const handleLap = (newTime) => {
-    // newTimmmme.toFixed(3);
-    Number.parseFloat(newTime).toFixed(2);
-    console.log(typeof newTime);
-    console.log("typeof laps[0] BEFORE LOOP is:    ", typeof laps[0]);
-    console.log("typeof newTime BEFORE LOOP is:    ", typeof newTime);
-    // calculate lap logic here
     let newLap = 0;
     // first lap if check
     if (laps[0] === 0) {
-      // if (typeof laps[0] !== "number" && typeof laps[0] === 0) {
-      console.log("here");
       setLaps([formatLapTime(newTime)]);
       saveOldLap(formatLapTime(newTime));
-      // setLaps((laps[0] = newTime));
-      if ((laps[0] = newTime)) {
-        console.log("newTime has taken over the first number in laps.");
-        console.log(
-          "typeof newTime after being added to array is:    ",
-          typeof laps[0]
-        );
-      }
     } else {
-      console.log("we are outside the first if check");
-      // if (laps[0] > 0) {
       newLap = newTime - oldLap;
-      saveOldLap(newTime);
-      // }
-      console.log("here is the newLap time:   ", newLap);
       setLaps([formatLapTime(newLap), ...laps]);
-      console.log("the new lap has been placed inside the array of laps");
+      saveOldLap(newTime);
     }
   };
-  // console.log("typeof laps[0] is:    ", typeof laps[0]);
-  // };
-  console.log("Here are the laps:     ", laps);
 
   return (
     <View style={styles.container}>
@@ -64,7 +41,7 @@ export default function TestApp(props) {
       >
         {({ start, resume, pause, stop, reset, getTimerState, getTime }) => (
           <>
-            <Text style={styles.text}>
+            <Text style={styles.stopwatchText}>
               <Timer.Hours
                 formatValue={(value) =>
                   `${value < 10 ? `0${value}` : value} : `
@@ -111,18 +88,26 @@ export default function TestApp(props) {
               >
                 <Text style={styles.buttonText}>Lap</Text>
               </TouchableOpacity>
-              {/* <ListComponent lap={laps}>Test</ListComponent> */}
             </View>
           </>
         )}
       </Timer>
-      <FlatList
-        data={laps}
-        renderItem={({ item }) => (
-          <Text style={styles.item}>{item > 0 ? item : null}</Text>
-        )}
-        keyExtractor={(item) => item.index}
-      />
+      <View style={styles.listContainer}>
+        <FlatList
+          data={laps}
+          renderItem={({ item }) => (
+            <View style={item > 0 ? styles.item : null}>
+              <Text
+                style={{ textAlign: "center", color: "white", fontSize: "20" }}
+              >
+                {item > 0 ? `${item}` : null}
+              </Text>
+            </View>
+          )}
+          keyExtractor={(item) => item.index}
+          style={styles.list}
+        />
+      </View>
     </View>
   );
 }
@@ -134,38 +119,45 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica Neue",
     flex: 1,
     display: "flex",
-    // backgroundColor: "#393c59",
-    // backgroundColor: "#080818",
     backgroundColor: "#383C4f",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    // paddingTop: "40%",
   },
   buttonParent: {
-    display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center",
     marginTop: "12%",
   },
   button: {
-    // backgroundColor: "#38364f",
     backgroundColor: "#7a86a4",
     padding: "4%",
     margin: "2%",
-    // paddingBottom: "2%",
-    display: "flex",
+    paddingBottom: "2%",
     borderRadius: 10,
-    // width: 80,
   },
   buttonText: {
     color: "#f0f3f8",
-    // color: "#7a86a4",
     alignSelf: "center",
   },
-  text: {
+  stopwatchText: {
+    textAlign: "center",
     color: "#f0f3f8",
     fontSize: 40,
     marginLeft: 7,
+  },
+  item: {
+    padding: 10,
+    fontSize: 22,
+    height: 44,
+    color: "white",
+    textAlign: "center",
+    marginBottom: 3,
+    // borderWidth: 2,
+    borderBottomWidth: 1,
+    borderBottomColor: "white",
+  },
+  listContainer: {
+    borderTopColor: "white",
+    borderTopWidth: 1,
+    marginTop: 30,
   },
 });
 

@@ -5,20 +5,13 @@ const ListComponent = ({ laps }) => {
   //   let padToTwo = (number) => (number <= 9 ? `0${number}` : number);
 
   return (
-    // <ScrollView style={styles.scroll}>
-    //   <FlatList
-    //     data={laps}
-    //     renderItem={({ laps, index }) => (
-    //       <Text key={index + 1} style={styles.item}>
-    //         {`#${index}            `}
-    //         {laps}
-    //       </Text>
-    //     )}
-    //   />
-    // </ScrollView>
     <FlatList
       data={laps}
-      renderItem={({ lap }) => <Text style={styles.item}>{lap}</Text>}
+      renderItem={({ item }) => (
+        <Text style={styles.item}>{item > 0 ? item : null}</Text>
+      )}
+      keyExtractor={(item) => item.index}
+      style={styles.list}
     />
   );
 };
@@ -26,18 +19,19 @@ const ListComponent = ({ laps }) => {
 export default ListComponent;
 
 const styles = StyleSheet.create({
-  scroll: {
-    maxHeight: "63%",
-    backgroundColor: "#C89933",
+  list: {
+    flex: 1,
+    width: "100%",
+    borderTopColor: "white",
+    borderWidth: 5,
+    marginTop: 20,
   },
-
   item: {
-    padding: 10,
-    fontSize: 22,
-    height: 44,
-    color: "#fff",
+    backgroundColor: "orange",
+    borderWidth: 5,
+    borderColor: "white",
+    color: "#f0f3f8",
+    fontSize: 20,
     textAlign: "center",
-    backgroundColor: "#fff",
-    marginBottom: 1,
   },
 });
