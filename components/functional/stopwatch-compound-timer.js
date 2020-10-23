@@ -163,6 +163,10 @@ const styles = StyleSheet.create({
 
 /*
 
+formatting numbers from string to number and back: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
+
+borders on one side are not natively supported by iOS: https://github.com/facebook/react-native/issues/29#issuecomment-96588898
+
 add elements to array in useState hook: https://www.codegrepper.com/code-examples/r/how+to+add+elements+to+an+array+in+usestate+hook
 
 properly firing a function insided onPress: https://stackoverflow.com/questions/43967308/onpress-function-firing-on-page-load
