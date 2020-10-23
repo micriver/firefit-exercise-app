@@ -5,33 +5,41 @@ const ListComponent = ({ laps }) => {
   //   let padToTwo = (number) => (number <= 9 ? `0${number}` : number);
 
   return (
-    <FlatList
-      data={laps}
-      renderItem={({ item }) => (
-        <Text style={styles.item}>{item > 0 ? item : null}</Text>
-      )}
-      keyExtractor={(item) => item.index}
-      style={styles.list}
-    />
+    <View style={styles.lapListContainer}>
+      <FlatList
+        data={laps}
+        renderItem={({ item }) => (
+          <View style={item > 0 ? styles.lapItemContainer : null}>
+            <Text
+              style={{ textAlign: "center", color: "white", fontSize: "20" }}
+            >
+              {item > 0 ? `${item}` : null}
+            </Text>
+          </View>
+        )}
+        keyExtractor={(item) => item.index}
+        style={styles.list}
+      />
+    </View>
   );
 };
 
 export default ListComponent;
 
 const styles = StyleSheet.create({
-  list: {
-    flex: 1,
-    width: "100%",
+  lapListContainer: {
     borderTopColor: "white",
-    borderWidth: 5,
-    marginTop: 20,
+    borderTopWidth: 1,
+    marginTop: 30,
   },
-  item: {
-    backgroundColor: "orange",
-    borderWidth: 5,
-    borderColor: "white",
-    color: "#f0f3f8",
-    fontSize: 20,
+  lapItemContainer: {
+    padding: 10,
+    fontSize: 22,
+    height: 44,
+    color: "white",
     textAlign: "center",
+    marginBottom: 3,
+    borderBottomWidth: 1,
+    borderBottomColor: "white",
   },
 });

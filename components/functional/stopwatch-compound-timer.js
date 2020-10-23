@@ -8,7 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import Timer, { getTimeParts } from "react-compound-timer";
-import ListComponent from "./list";
+import LapList from "./list";
 
 export default function TestApp(props) {
   const [laps, setLaps] = useState([0]);
@@ -63,7 +63,7 @@ export default function TestApp(props) {
             </Text>
 
             {/* buttons */}
-            <View style={styles.buttonParent}>
+            <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
@@ -92,22 +92,7 @@ export default function TestApp(props) {
           </>
         )}
       </Timer>
-      <View style={styles.listContainer}>
-        <FlatList
-          data={laps}
-          renderItem={({ item }) => (
-            <View style={item > 0 ? styles.item : null}>
-              <Text
-                style={{ textAlign: "center", color: "white", fontSize: "20" }}
-              >
-                {item > 0 ? `${item}` : null}
-              </Text>
-            </View>
-          )}
-          keyExtractor={(item) => item.index}
-          style={styles.list}
-        />
-      </View>
+      <LapList laps={laps} />
     </View>
   );
 }
@@ -120,8 +105,15 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     backgroundColor: "#383C4f",
+    paddingTop: "40%",
   },
-  buttonParent: {
+  stopwatchText: {
+    textAlign: "center",
+    color: "#f0f3f8",
+    fontSize: 40,
+    marginLeft: 7,
+  },
+  buttonContainer: {
     flexDirection: "row",
     justifyContent: "center",
     marginTop: "12%",
@@ -136,28 +128,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#f0f3f8",
     alignSelf: "center",
-  },
-  stopwatchText: {
-    textAlign: "center",
-    color: "#f0f3f8",
-    fontSize: 40,
-    marginLeft: 7,
-  },
-  item: {
-    padding: 10,
-    fontSize: 22,
-    height: 44,
-    color: "white",
-    textAlign: "center",
-    marginBottom: 3,
-    // borderWidth: 2,
-    borderBottomWidth: 1,
-    borderBottomColor: "white",
-  },
-  listContainer: {
-    borderTopColor: "white",
-    borderTopWidth: 1,
-    marginTop: 30,
   },
 });
 
