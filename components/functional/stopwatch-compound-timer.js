@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica Neue",
     flex: 1,
     display: "flex",
-    backgroundColor: "#383C4f",
+    // backgroundColor: "#383C4f",
     paddingTop: "40%",
   },
   stopwatchText: {
@@ -132,6 +132,8 @@ const styles = StyleSheet.create({
 });
 
 /*
+
+timer settings: https://volkov97.github.io/react-compound-timer/
 
 formatting numbers from string to number and back: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
 

@@ -6,15 +6,18 @@ import Stopwatch from "./stopwatch-compound-timer";
 
 const gridtest = () => {
   return (
-    <Grid>
-      {/* <Image
-        style={styles.logo}
-        source={require("../../assets/firefit.png")}
-      ></Image> */}
-      <Row size={6} style={{ backgroundColor: "grey" }}>
+    <Grid style={styles.container}>
+      <Row size={1.8}>
+        <Image
+          source={require("../../assets/firefit.png")}
+          resizeMode='contain'
+          style={styles.logo}
+        ></Image>
+      </Row>
+      <Row size={6}>
         <Stopwatch />
       </Row>
-      <Row size={1.1} style={{ backgroundColor: "grey" }}>
+      <Row size={1.5}>
         <HomeRow />
       </Row>
     </Grid>
@@ -37,20 +40,26 @@ const gridtest = () => {
 export default gridtest;
 
 const styles = StyleSheet.create({
-  logo: {
-    // padding: "10%",
-  },
   container: {
     //   center any content
-    // flex: 1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    margin: 20,
+    backgroundColor: "rgba(35,35,35,1)",
   },
-  text: {
-    textAlign: "center",
-    fontSize: 20,
+  logo: {
+    width: 300,
+    height: 278,
+    marginTop: -25,
+    // backgroundColor: "black",
+    // marginLeft: 49,
   },
 });
 
 // center text: https://github.com/facebook/react-native/issues/325
+
+/*
+
+react native easy grid: https://www.npmjs.com/package/react-native-easy-grid
+
+*/
