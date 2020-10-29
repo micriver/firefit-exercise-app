@@ -110,3 +110,11 @@ const options = {
     marginLeft: 7,
   },
 };
+
+/*
+
+date and time picker for timer: https://www.npmjs.com/package/react-native-date-picker
+
+rolling number picker: https://www.npmjs.com/package/react-native-number-please
+
+*/

@@ -34,3 +34,5 @@ const styles = StyleSheet.create({
     color: "#f0f3f8",
   },
 });
+
+// Use this and stacking for main navigation of the app: https://reactnavigation.org/docs/material-top-tab-navigator/
